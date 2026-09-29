@@ -29,9 +29,11 @@ router.register('tables', TableViewSet)
 router.register('orders', OrderViewSet)
 
 urlpatterns = [
+    path('', home),
+    path('api/me/', me),
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
     path('api/token/', TokenObtainPairView.as_view()),
     path('api/token/refresh/', TokenRefreshView.as_view()),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-]
+
