@@ -23,12 +23,15 @@ from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from core.views import *
 
 router = DefaultRouter()
+router.register('reservations', ReservationViewSet)
 router.register('categories', CategoryViewSet)
 router.register('dishes', DishViewSet)
 router.register('tables', TableViewSet)
 router.register('orders', OrderViewSet)
 
 urlpatterns = [
+    path('api/menu/', public_menu),
+    path('api/dashboard/', dashboard),
     path('', home),
     path('api/me/', me),
     path('admin/', admin.site.urls),

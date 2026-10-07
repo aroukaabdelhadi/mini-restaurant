@@ -1,0 +1,188 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+* {
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+.foodie-container {
+  background-color: #fffdf9;
+  min-height: 100vh;
+  color: #2d2d2d;
+  padding: 20px 80px;
+}
+
+/* Navbar */
+.foodie-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: 700;
+  color: #ff8c00;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 30px;
+  list-style: none;
+  font-weight: 500;
+  font-size: 15px;
+}
+
+.nav-links li {
+  cursor: pointer;
+  color: #555;
+  transition: color 0.2s;
+}
+
+.nav-links li.active, .nav-links li:hover {
+  color: #ff8c00;
+}
+
+.btn-orange {
+  background-color: #ff8c00;
+  color: #fff;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0px 4px 12px rgba(255, 140, 0, 0.3);
+  transition: background-color 0.2s;
+}
+
+.btn-orange:hover {
+  background-color: #e07b00;
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: #2d2d2d;
+  border: 1.5px solid #e0e0e0;
+  padding: 10px 24px;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* Hero Section */
+.hero-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 40px 0 80px 0;
+}
+
+.hero-text {
+  max-width: 500px;
+}
+
+.welcome-badge {
+  color: #ff8c00;
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.hero-title {
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 20px;
+}
+
+.highlight-orange {
+  color: #ff8c00;
+  position: relative;
+}
+
+.hero-desc {
+  color: #777;
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 15px;
+}
+
+/* Hero Image Circle */
+.hero-image-wrapper {
+  position: relative;
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  border: 3px dashed #ffd59e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-main-img {
+  width: 380px;
+  height: 380px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Section Title */
+.section-header {
+  margin-bottom: 30px;
+}
+
+.section-title {
+  font-size: 32px;
+  font-weight: 700;
+}
+
+/* Grid Dishe Cards */
+.dishes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 25px;
+}
+
+.dish-card {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.03);
+  border: 1px solid #f3f3f3;
+  transition: transform 0.2s;
+}
+
+.dish-card:hover {
+  transform: translateY(-5px);
+}
+
+.dish-img {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 15px;
+}
+
+.dish-name {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.dish-price {
+  font-size: 18px;
+  font-weight: 700;
+  color: #ff8c00;
+  margin-bottom: 15px;
+}

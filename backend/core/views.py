@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from rest_framework import viewsets
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from .models import *
 from .serializers import *
 from rest_framework.decorators import api_view, permission_classes
@@ -138,5 +138,24 @@ class OrderViewSet(viewsets.ModelViewSet):
 
 
 
-    
+    from rest_framework.permissions import AllowAny
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def public_menu(request):
+    categories = Category.objects.prefetch_related('dishes').all()
+    data = []
+    for cat in categories:
+        dishes = cat.dishes.filter(available=True)
+        data.append({
+            'id': cat.id,
+            'name': cat.name,
+            'dishes': [
+                {'id': d.id, 'name': d.name, 'price': str(d.price),
+                 'image': request.build_absolute_uri(d.image.url) if d.image else None}
+                for d in dishes
+            ]
+        })
+    return Response(data)
+
 # Create your views here.

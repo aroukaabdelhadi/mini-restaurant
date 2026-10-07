@@ -21,34 +21,22 @@ export default function Dishes() {
     fd.append('price', form.price);
     fd.append('category', form.category);
     if (form.image) fd.append('image', form.image);
-
     if (editingId) await api.patch(`dishes/${editingId}/`, fd);
     else await api.post('dishes/', fd);
-
     setForm({ name: '', price: '', category: '', image: null });
     setEditingId(null);
     load();
   };
 
-  const edit = (d) => {
-    setEditingId(d.id);
-    setForm({ name: d.name, price: d.price, category: d.category, image: null });
-  };
-
-  const remove = async (id) => {
-    if (confirm('Supprimer ?')) { await api.delete(`dishes/${id}/`); load(); }
-  };
-
-  const toggle = async (d) => {
-    await api.patch(`dishes/${d.id}/`, { available: !d.available });
-    load();
-  };
+  const edit = (d) => { setEditingId(d.id); setForm({ name: d.name, price: d.price, category: d.category, image: null }); };
+  const remove = async (id) => { if (confirm('Supprimer ?')) { await api.delete(`dishes/${id}/`); load(); } };
+  const toggle = async (d) => { await api.patch(`dishes/${d.id}/`, { available: !d.available }); load(); };
 
   return (
-    <div>
-      <h1>Plats</h1>
-      <form onSubmit={submit}>
-        <input placeholder="Nom" value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} required />
+    <div className="page">
+      <h1>La Carte</h1>
+      <form onSubmit={submit} className="form-row card">
+        <input placeholder="Nom du plat" value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} required />
         <input type="number" step="0.01" placeholder="Prix" value={form.price} onChange={e => setForm({ ...form, price: e.target.value })} required />
         <select value={form.category} onChange={e => setForm({ ...form, category: e.target.value })} required>
           <option value="">Catégorie</option>
@@ -58,13 +46,19 @@ export default function Dishes() {
         <button>{editingId ? 'Modifier' : 'Ajouter'}</button>
       </form>
 
-      <ul>
+      <ul className="item-list">
         {dishes.map(d => (
           <li key={d.id}>
-            {d.name} - {d.price} DH - {d.available ? '✅' : '❌'}
-            <button onClick={() => edit(d)}>Edit</button>
-            <button onClick={() => toggle(d)}>Dispo</button>
-            <button onClick={() => remove(d.id)}>Delete</button>
+            <span className="name">{d.name}</span>
+            <span className="price">{d.price} DH</span>
+            <span className={`badge ${d.available ? 'badge-served' : 'badge-pending'}`}>
+              {d.available ? 'Disponible' : 'Indisponible'}
+            </span>
+            <div style={{ display: 'flex', gap: 8 }}>
+              <button onClick={() => edit(d)}>Modifier</button>
+              <button onClick={() => toggle(d)}>Dispo</button>
+              <button onClick={() => remove(d.id)}>Suppr.</button>
+            </div>
           </li>
         ))}
       </ul>

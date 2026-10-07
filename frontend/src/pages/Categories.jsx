@@ -13,30 +13,27 @@ export default function Categories() {
     e.preventDefault();
     if (editingId) await api.patch(`categories/${editingId}/`, { name });
     else await api.post('categories/', { name });
-    setName('');
-    setEditingId(null);
-    load();
+    setName(''); setEditingId(null); load();
   };
-
   const edit = (c) => { setEditingId(c.id); setName(c.name); };
-  const remove = async (id) => {
-    if (confirm('Supprimer ?')) { await api.delete(`categories/${id}/`); load(); }
-  };
+  const remove = async (id) => { if (confirm('Supprimer ?')) { await api.delete(`categories/${id}/`); load(); } };
 
   return (
-    <div>
+    <div className="page">
       <h1>Catégories</h1>
-      <form onSubmit={submit}>
-        <input placeholder="Nom catégorie" value={name} onChange={e => setName(e.target.value)} required />
+      <form onSubmit={submit} className="form-row card">
+        <input placeholder="Nom de la catégorie" value={name} onChange={e => setName(e.target.value)} required />
         <button>{editingId ? 'Modifier' : 'Ajouter'}</button>
       </form>
 
-      <ul>
+      <ul className="item-list">
         {categories.map(c => (
           <li key={c.id}>
-            {c.name}
-            <button onClick={() => edit(c)}>Edit</button>
-            <button onClick={() => remove(c.id)}>Delete</button>
+            <span className="name">{c.name}</span>
+            <div style={{ display: 'flex', gap: 8 }}>
+              <button onClick={() => edit(c)}>Modifier</button>
+              <button onClick={() => remove(c.id)}>Suppr.</button>
+            </div>
           </li>
         ))}
       </ul>
